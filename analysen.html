@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Alle Aktienanalysen von AktienBen.">
+  <title>AktienBen | Analysen</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="articles.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="analysen">
+
+  <header class="header">
+    <div class="container nav">
+      <a class="logo" href="index.html">Aktien<span>Ben</span><i>.</i></a>
+      <nav aria-label="Hauptnavigation">
+        <a href="index.html">Home</a>
+        <a class="active" href="analysen.html">Analysen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="page-intro">
+      <div class="eyebrow">RESEARCH & FUNDAMENTALANALYSE</div>
+      <h1>Aktienanalysen<span>.</span></h1>
+      <p>
+        Geschäftsmodelle, Wachstum, Profitabilität und Bewertung.
+        Alle Analysen im Überblick.
+      </p>
+    </section>
+
+    <section class="section">
+      <div class="toolbar">
+        <h2>Alle Beiträge</h2>
+        <input
+          id="search"
+          type="search"
+          placeholder="Unternehmen suchen ..."
+          aria-label="Aktienanalysen durchsuchen"
+        >
+      </div>
+
+      <div id="analysis-list" class="analysis-list"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span class="year"></span> AktienBen</span>
+      <span>Keine Anlageberatung. Eigene Recherche erforderlich.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AktienBen – Aktienanalysen und Fundamentaldaten.">
+  <title>AktienBen | Home</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="articles.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="home">
+
+  <header class="header">
+    <div class="container nav">
+      <a class="logo" href="index.html">Aktien<span>Ben</span><i>.</i></a>
+      <nav aria-label="Hauptnavigation">
+        <a class="active" href="index.html">Home</a>
+        <a href="analysen.html">Analysen</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="eyebrow">UNABHÄNGIGE AKTIENANALYSEN</div>
+      <h1>Starke Unternehmen finden.<br><span>Fundiert investieren.</span></h1>
+      <p>
+        Fundamentale Unternehmensanalysen, Wachstumschancen
+        und Risiken. Datenbasiert und unabhängig.
+      </p>
+      <a class="button" href="analysen.html">Alle Analysen ansehen ↗</a>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">NEU VERÖFFENTLICHT</div>
+          <h2>Neueste Analyse</h2>
+        </div>
+      </div>
+      <div id="featured"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <h2>Weitere Analysen</h2>
+        <a class="text-link" href="analysen.html">Alle ansehen ↗</a>
+      </div>
+      <div id="recent" class="card-grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© <span class="year"></span> AktienBen</span>
+      <span>Keine Anlageberatung. Eigene Recherche erforderlich.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
