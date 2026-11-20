@@ -7,7 +7,7 @@ const articles = [
     date: "2026-11-19",
     title: "Axon Enterprise – Die Zukunft der öffentlichen Sicherheit?",
     excerpt: "Wie Axon mit Software, Cloud und KI sein Geschäftsmodell erweitert.",
-    image: "images/Axon_banner.png", // Beispiel: "images/axon.jpg"
+    image: "images/Axon_Banner.png", // Beispiel: "images/axon.jpg"
 
    
 content: [
