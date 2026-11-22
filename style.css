@@ -579,3 +579,24 @@ h2 { font-size: 28px; margin: 8px 0; }
   white-space: pre-line;
 }
 
+
+/* Instagram in der Hauptnavigation */
+nav .instagram-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  color: #f3f6fc;
+  opacity: .88;
+  transition: color .2s ease, opacity .2s ease, filter .2s ease;
+}
+nav .instagram-link:hover,
+nav .instagram-link:focus-visible {
+  color: #ffffff;
+  opacity: 1;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.7));
+}
+nav .instagram-link svg { display: block; }
+@media (max-width: 560px) {
+  nav .instagram-link svg { width: 21px; height: 21px; }
+}
