@@ -75,8 +75,24 @@ button { cursor: pointer; }
   letter-spacing: -1.4px;
 }
 
+.logo {
+  display: inline-block;
+  position: relative;
+  line-height: 1.25;
+  padding-bottom: 5px;
+}
+
+.logo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: #fff;
+}
+
 .logo span { color: var(--accent); }
-.logo i { color: var(--orange); font-style: normal; }
 
 nav { display: flex; gap: 32px; }
 
