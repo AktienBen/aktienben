@@ -298,7 +298,7 @@ Disclaimer: Keine Anlageberatung. Alle Inhalte dienen ausschließlich Informatio
     "content": [
       {
         "type": "text",
-        "heading": "",
+        "heading": "ServiceNow – Einer der größten Profiteure der KI-Revolution?",
         "text": "ServiceNow gehört für mich zu den spannendsten Unternehmen im Bereich der Unternehmenssoftware. Während zahlreiche Technologieunternehmen noch versuchen, künstliche Intelligenz erfolgreich zu monetarisieren, verfügt ServiceNow bereits über eine etablierte, hochprofitable Softwareplattform, die tief in den Geschäftsprozessen großer Unternehmen verankert ist.\n\nBesonders interessant finde ich, dass ServiceNow von der zunehmenden Automatisierung gleich mehrfach profitieren könnte. Das Unternehmen kann seine bestehenden Softwarelösungen um KI-Funktionen erweitern, zusätzliche Produkte an bestehende Kunden verkaufen und sich gleichzeitig als zentrale Plattform für die Steuerung intelligenter KI-Agenten etablieren.\n\nDabei sehe ich ServiceNow nicht nur als klassischen Softwareanbieter, sondern zunehmend als einen wichtigen Bestandteil der digitalen Infrastruktur großer Unternehmen."
       },
       {
