@@ -129,8 +129,9 @@ function analysisItem(article) {
       <div class="article-body">
         ${article.content.map(renderBlock).join("")}
         <p class="chart-note">
-          Hinweis: Keine Anlageberatung. Alle Angaben sind
-          eigenständig zu überprüfen.
+          ${article.id === "servicenow"
+            ? "Disclaimer: Keine Anlageberatung. Alle Inhalte dienen ausschließlich Informationszwecken. Das ist meine Recherchearbeit. Investitionen erfolgen auf eigene Verantwortung und sind mit Risiken verbunden."
+            : "Hinweis: Keine Anlageberatung. Alle Angaben sind eigenständig zu überprüfen."}
         </p>
       </div>
     </details>
