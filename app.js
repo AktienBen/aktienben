@@ -39,7 +39,7 @@ function cover(article) {
 
 function card(article) {
   return `
-    <a class="card" href="analysen.html#${encodeURIComponent(article.id)}">
+    <a class="card" href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html"}[article.id] || ("analysen.html#" + encodeURIComponent(article.id)))}">
       ${cover(article)}
       <div class="card-content">
         <span class="meta">
@@ -127,6 +127,7 @@ function analysisItem(article) {
       </summary>
 
       <div class="article-body">
+        <p><a class="text-link" href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html"}[article.id] || ("analysen.html#" + encodeURIComponent(article.id)))}">Analyse auf eigener Seite öffnen ↗</a></p>
         ${article.content.map(renderBlock).join("")}
         <p class="chart-note">
           ${article.id === "servicenow"
@@ -167,7 +168,7 @@ function initHome() {
         <h3>${escapeHTML(latest.title)}</h3>
         <p>${escapeHTML(latest.excerpt)}</p>
         <a class="button"
-           href="analysen.html#${encodeURIComponent(latest.id)}">
+           href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html"}[latest.id] || ("analysen.html#" + encodeURIComponent(latest.id)))}">
           Vollständige Analyse ↗
         </a>
       </div>
