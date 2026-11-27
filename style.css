@@ -677,3 +677,30 @@ nav .instagram-link svg { display: block; }
   object-fit: contain;
   object-position: center;
 }
+
+/* Axon und Cloudflare: etwas höhere Bildproportionen, bündig ohne Zuschnitt */
+.card-grid .card:has(.cover img[src="images/Axon_Banner.png"]) {
+  container-type: inline-size;
+}
+.card-grid .card:has(.cover img[src="images/Axon_Banner.png"]) .cover {
+  aspect-ratio: 2.3 / 1;
+}
+.card-grid .cover img[src="images/Axon_Banner.png"] {
+  object-fit: fill;
+}
+.card-grid .card:has(.cover img[src="images/Axon_Banner.png"]) .card-content {
+  padding-top: calc(25px - 1.73913cqw);
+  padding-bottom: calc(25px - 1.73913cqw);
+}
+@media (min-width: 1051px) {
+  .featured-card:has(.cover img[src="images/Cloudflare_banner.png"]) {
+    grid-template-columns: minmax(0, 46fr) minmax(0, 54fr);
+    align-items: stretch;
+  }
+  .featured-card:has(.cover img[src="images/Cloudflare_banner.png"]) .cover {
+    aspect-ratio: 2.3 / 1;
+  }
+  .featured-card:has(.cover img[src="images/Cloudflare_banner.png"]) .cover img {
+    object-fit: fill;
+  }
+}
