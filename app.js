@@ -39,7 +39,7 @@ function cover(article) {
 
 function card(article) {
   return `
-    <a class="card" href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html"}[article.id] || ("analysen.html#" + encodeURIComponent(article.id)))}">
+    <a class="card" href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html", cloudflare: "cloudflare.html"}[article.id] || ("analysen.html#" + encodeURIComponent(article.id)))}">
       ${cover(article)}
       <div class="card-content">
         <span class="meta">
@@ -84,6 +84,8 @@ function renderChart(block) {
 }
 
 function renderBlock(block) {
+  // Statisch hinterlegter, redaktioneller HTML-Inhalt (Cloudflare).
+  if (block.type === "formatted") return block.html;
   if (block.type === "text") {
     return `
       <section>
@@ -127,13 +129,9 @@ function analysisItem(article) {
       </summary>
 
       <div class="article-body">
-        <p><a class="text-link" href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html"}[article.id] || ("analysen.html#" + encodeURIComponent(article.id)))}">Analyse auf eigener Seite öffnen ↗</a></p>
+        <p><a class="text-link" href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html", cloudflare: "cloudflare.html"}[article.id] || ("analysen.html#" + encodeURIComponent(article.id)))}">Analyse auf eigener Seite öffnen ↗</a></p>
         ${article.content.map(renderBlock).join("")}
-        <p class="chart-note">
-          ${article.id === "servicenow"
-            ? "Disclaimer: Keine Anlageberatung. Alle Inhalte dienen ausschließlich Informationszwecken. Das ist meine Recherchearbeit. Investitionen erfolgen auf eigene Verantwortung und sind mit Risiken verbunden."
-            : "Hinweis: Keine Anlageberatung. Alle Angaben sind eigenständig zu überprüfen."}
-        </p>
+        ${article.id === "cloudflare" ? "" : `<p class="chart-note">${article.id === "servicenow" ? "Disclaimer: Keine Anlageberatung. Alle Inhalte dienen ausschließlich Informationszwecken. Das ist meine Recherchearbeit. Investitionen erfolgen auf eigene Verantwortung und sind mit Risiken verbunden." : "Hinweis: Keine Anlageberatung. Alle Angaben sind eigenständig zu überprüfen."}</p>`}
       </div>
     </details>
   `;
@@ -168,14 +166,14 @@ function initHome() {
         <h3>${escapeHTML(latest.title)}</h3>
         <p>${escapeHTML(latest.excerpt)}</p>
         <a class="button"
-           href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html"}[latest.id] || ("analysen.html#" + encodeURIComponent(latest.id)))}">
+           href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html", cloudflare: "cloudflare.html"}[latest.id] || ("analysen.html#" + encodeURIComponent(latest.id)))}">
           Vollständige Analyse ↗
         </a>
       </div>
     </div>
   `;
 
-  recent.innerHTML = sortedArticles.slice(1, 3).map(card).join("");
+  recent.innerHTML = sortedArticles.slice(1, 4).map(card).join("");
 }
 
 function initAnalyses() {

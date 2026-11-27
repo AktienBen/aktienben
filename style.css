@@ -600,3 +600,19 @@ nav .instagram-link svg { display: block; }
 @media (max-width: 560px) {
   nav .instagram-link svg { width: 21px; height: 21px; }
 }
+
+/* Cloudflare: Überschriftenhierarchie und Tabellen aus dem Word-Dokument */
+.cloudflare-content { font-size: 16px; }
+.cloudflare-content h2 { font-size: 1.5em; letter-spacing: -.5px; margin: 44px 0 18px; color: var(--text); }
+.cloudflare-content h3 { font-size: 1.125em; letter-spacing: -.2px; margin: 30px 0 14px; color: var(--text); }
+.cloudflare-content h2:first-child { margin-top: 0; }
+.cloudflare-content p { font-size: 1em; }
+.cloudflare-content ul { color: #cbd5e1; max-width: 820px; padding-left: 25px; line-height: 1.9; }
+.cloudflare-content .cloudflare-quote { margin: 24px 0; }
+.cloudflare-content .cloudflare-disclaimer { color: var(--muted); }
+.cloudflare-table-wrap { max-width: 820px; overflow-x: auto; margin: 25px 0; }
+.cloudflare-table { border-collapse: collapse; width: 100%; color: #cbd5e1; font-size: 1em; }
+.cloudflare-table th, .cloudflare-table td { padding: 10px 13px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+.cloudflare-table th { font-weight: 700; color: var(--text); }
+.cloudflare-table td:last-child, .cloudflare-table th:last-child { text-align: right; }
+@media (max-width: 560px) { .cloudflare-table th, .cloudflare-table td { padding: 8px 5px; } }
