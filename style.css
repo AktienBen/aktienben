@@ -659,3 +659,21 @@ nav .instagram-link svg { display: block; }
     gap: 12px;
   }
 }
+
+/* Nur Axon und Cloudflare: Originalproportionen innerhalb der bestehenden Kacheln */
+.card-grid .cover img[src="images/Axon_Banner.png"],
+.card-grid .cover img[src="images/Cloudflare_banner.png"] {
+  object-fit: contain;
+  object-position: center;
+}
+.featured-card:has(.cover img[src="images/Cloudflare_banner.png"]) .cover {
+  aspect-ratio: 5 / 2;
+}
+.featured-card:has(.cover img[src="images/Cloudflare_banner.png"]) .cover img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
