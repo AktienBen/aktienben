@@ -590,8 +590,16 @@ nav .instagram-link {
   opacity: .88;
   transition: color .2s ease, opacity .2s ease, filter .2s ease;
 }
+.about-instagram {
+  color: #fff;
+  font-weight: 600;
+  transition: filter .2s ease;
+}
+
 nav .instagram-link:hover,
-nav .instagram-link:focus-visible {
+nav .instagram-link:focus-visible,
+.about-instagram:hover,
+.about-instagram:focus-visible {
   color: #ffffff;
   opacity: 1;
   filter: drop-shadow(0 0 6px rgba(255,255,255,.7));
