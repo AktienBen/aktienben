@@ -172,7 +172,7 @@ function initHome() {
     </div>
   `;
 
-  recent.innerHTML = sortedArticles.slice(1, 4).map(card).join("");
+  recent.innerHTML = sortedArticles.slice(1, 5).map(card).join("");
 }
 
 function initAnalyses() {
