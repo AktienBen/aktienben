@@ -704,3 +704,13 @@ nav .instagram-link svg { display: block; }
     object-fit: fill;
   }
 }
+
+/* Breites Layout für Startseite und Analyseübersicht */
+@media (min-width: 1600px) {
+  .header .container,
+  .footer .container,
+  body[data-page="home"] > main.container,
+  body[data-page="analysen"] > main.container {
+    width: clamp(1160px, calc(65vw + 120px), 1800px);
+  }
+}
