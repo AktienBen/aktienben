@@ -149,14 +149,30 @@ let turnstileReady;
 function loadTurnstile() {
   turnstileReady ??= new Promise((resolve, reject) => {
     const script = document.createElement("script");
-    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-    script.onload = () => window.turnstile.ready(() => resolve(window.turnstile));
-    script.onerror = () => {
-      turnstileReady = undefined;
+    const callback = "aktienBenTurnstileLoaded";
+    script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=" + callback;
+
+    function cleanup() {
+      clearTimeout(timeout);
+      delete window[callback];
+    }
+
+    function fail() {
+      cleanup();
       script.remove();
       reject(new Error("Turnstile unavailable"));
+    }
+
+    const timeout = setTimeout(fail, 15000);
+    window[callback] = () => {
+      cleanup();
+      resolve(window.turnstile);
     };
+    script.onerror = fail;
     document.head.append(script);
+  }).catch(error => {
+    turnstileReady = undefined;
+    throw error;
   });
   return turnstileReady;
 }
@@ -168,10 +184,9 @@ async function getToken(element, sitekey, action) {
     return await new Promise((resolve, reject) => {
       const failed = () => reject(new Error("Verification failed"));
       widget = turnstile.render(element, {
-        sitekey, action, execution: "execute", appearance: "interaction-only",
+        sitekey, action, appearance: "interaction-only",
         callback: resolve, "error-callback": failed, "expired-callback": failed, "timeout-callback": failed
       });
-      turnstile.execute(widget);
     });
   } finally {
     if (widget !== undefined) turnstile.remove(widget);
