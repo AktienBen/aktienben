@@ -2,6 +2,25 @@ const siteOrigin = "https://aktienben.github.io";
 const browserIdPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const articlePattern = /^[a-z0-9-]{1,64}$/;
 
+const articleRegistryUrl = "https://aktienben.github.io/aktienben/articles.js";
+const articleEntryPattern = /(?:^|\n)[ \t]*(?:\{|articles\.push\(\{)[ \t]*\r?\n[ \t]*["\']?id["\']?[ \t]*:[ \t]*["\']([a-z0-9-]{1,64})["\'][ \t]*,[ \t]*\r?\n[ \t]*["\']?company["\']?[ \t]*:/g;
+
+async function isPublishedArticle(article, env) {
+  try {
+    const response = await fetch(articleRegistryUrl);
+    if (!response.ok) throw new Error("Article registry returned " + response.status);
+
+    const source = await response.text();
+    const ids = Array.from(source.matchAll(articleEntryPattern), match => match[1]);
+    if (!ids.length) throw new Error("Article registry is empty");
+    return ids.includes(article);
+  } catch (error) {
+    console.error("Article registry unavailable", error);
+    if ((env.ARTICLE_IDS ?? "").split(",").some(id => id.trim() === article)) return true;
+    throw error;
+  }
+}
+
 const headers = {
   "Access-Control-Allow-Origin": siteOrigin,
   "Cache-Control": "no-store"
@@ -49,27 +68,28 @@ export default {
   async fetch(request, env) {
     const { pathname } = new URL(request.url);
     const [, prefix, article, action, extra] = pathname.split("/");
-    const allowed = (env.ARTICLE_IDS ?? "").split(",").map(id => id.trim());
-    if (prefix !== "articles" || extra !== undefined || !articlePattern.test(article ?? "") || !allowed.includes(article)) {
+    if (prefix !== "articles" || extra !== undefined || !articlePattern.test(article ?? "")) {
       return json({ error: "not_found" }, 404);
     }
 
     if (request.headers.get("Origin") !== siteOrigin) {
       return json({ error: "forbidden" }, 403);
     }
-    if (request.method === "OPTIONS") {
-      return new Response(null, {
-        status: 204,
-        headers: {
-          ...headers,
-          "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-          "Access-Control-Allow-Headers": "Content-Type",
-          "Access-Control-Max-Age": "3600"
-        }
-      });
-    }
-
     try {
+      if (!await isPublishedArticle(article, env)) return json({ error: "not_found" }, 404);
+
+      if (request.method === "OPTIONS") {
+        return new Response(null, {
+          status: 204,
+          headers: {
+            ...headers,
+            "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type",
+            "Access-Control-Max-Age": "3600"
+          }
+        });
+      }
+
       if (request.method === "GET" && action === undefined) return await readArticle(env.DB, article);
       if (request.method !== "POST" || !["like", "comment"].includes(action)) {
         return json({ error: "not_found" }, 404);

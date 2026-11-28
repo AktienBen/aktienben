@@ -1,11 +1,10 @@
-const articlePages = {axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html", cloudflare: "cloudflare.html"};
 const discussionSettings = {
   endpoint: "https://aktienben-community.kontakt-aktienben.workers.dev/",
   siteKey: "0x4AAAAAAGXDJUTM0vLAzDr6"
 };
 
 async function mountDiscussion(articleBody, articleId) {
-  if (!articleBody || !Object.hasOwn(articlePages, articleId)) return;
+  if (!articleBody || !articleId) return;
 
   try {
     const { addDiscussion } = await import("./discussion.js");
@@ -54,9 +53,13 @@ function cover(article) {
   `;
 }
 
+function articleHref(article) {
+  return article.page || ("analysen.html#" + encodeURIComponent(article.id));
+}
+
 function card(article) {
   return `
-    <a class="card" href="${escapeHTML(articlePages[article.id] || ("analysen.html#" + encodeURIComponent(article.id)))}">
+    <a class="card" href="${escapeHTML(articleHref(article))}">
       ${cover(article)}
       <div class="card-content">
         <span class="meta">
@@ -182,7 +185,7 @@ function initHome() {
         <h3>${escapeHTML(latest.title)}</h3>
         <p>${escapeHTML(latest.excerpt)}</p>
         <a class="button"
-           href="${escapeHTML(articlePages[latest.id] || ("analysen.html#" + encodeURIComponent(latest.id)))}">
+           href="${escapeHTML(articleHref(latest))}">
           Vollständige Analyse ↗
         </a>
       </div>
@@ -243,7 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (document.body.dataset.page === "article") {
     const page = location.pathname.split("/").pop();
-    const articleId = Object.keys(articlePages).find(id => articlePages[id] === page);
-    void mountDiscussion(document.querySelector("main .article-body"), articleId);
+    const article = articles.find(article => article.page === page);
+    void mountDiscussion(document.querySelector("main .article-body"), article?.id);
   }
 });

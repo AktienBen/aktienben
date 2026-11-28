@@ -1,8 +1,10 @@
 
+// Artikel beginnen mit id und company. Bei einer eigenen HTML-Seite folgt page mit dem Dateinamen.
 const articles = [
   {
     id: "axon",
     company: "Axon Enterprise",
+    page: "axon-enterprise.html",
     ticker: "AXON",
     date: "2026-11-19",
     title: "Axon Enterprise – Die Zukunft der öffentlichen Sicherheit?",
@@ -177,6 +179,7 @@ Disclaimer: Keine Anlageberatung. Alle Inhalte dienen ausschließlich Informatio
 {
   id: "rocketlab",
   company: "Rocket Lab",
+  page: "rocket-lab.html",
   ticker: "RKLB",
   date: "2026-11-15",
   title: "ROCKET LAB - Cashburn-Automat oder Gewinneraktie",
@@ -290,6 +293,7 @@ Disclaimer: Keine Anlageberatung. Alle Inhalte dienen ausschließlich Informatio
   {
     "id": "servicenow",
     "company": "ServiceNow",
+    "page": "servicenow.html",
     "ticker": "NOW",
     "date": "2026-11-10",
     "title": "ServiceNow – Einer der größten Profiteure der KI-Revolution?",
@@ -369,6 +373,7 @@ Disclaimer: Keine Anlageberatung. Alle Inhalte dienen ausschließlich Informatio
 articles.push({
   "id": "cloudflare",
   "company": "Cloudflare",
+  "page": "cloudflare.html",
   "ticker": "NET",
   "date": "2026-11-27",
   "title": "Cloudflare – Das globale Netzwerk für KI-Anwendungen und sicheres Internet",
