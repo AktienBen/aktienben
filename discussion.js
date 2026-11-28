@@ -49,16 +49,7 @@ export function addDiscussion(container, article, { endpoint, siteKey }) {
 
     displayLikes(initial.likes);
     if (!initial.comments.length) comments.textContent = "Noch keine Kommentare.";
-    for (const item of initial.comments) {
-      const comment = document.createElement("article");
-      const name = document.createElement("strong");
-      const message = document.createElement("p");
-      name.textContent = item.name;
-      message.textContent = item.message;
-      message.style.whiteSpace = "pre-wrap";
-      comment.append(name, message);
-      comments.append(comment);
-    }
+    for (const item of initial.comments) comments.append(createComment(item));
 
     async function write(action, data, success) {
       like.disabled = submit.disabled = true;
@@ -91,14 +82,33 @@ export function addDiscussion(container, article, { endpoint, siteKey }) {
     form.addEventListener("submit", event => {
       event.preventDefault();
       const data = new FormData(form);
-      void write("comment", { name: data.get("name"), message: data.get("message") }, () => {
+      void write("comment", { name: data.get("name"), message: data.get("message") }, response => {
         form.reset();
-        status.textContent = "Dein Kommentar wurde eingereicht und wartet auf Freigabe.";
+        if (!response.comment) {
+          status.textContent = "Dein Kommentar wurde eingereicht.";
+          return;
+        }
+
+        const comment = createComment(response.comment);
+        if (!comments.firstElementChild) comments.replaceChildren(comment);
+        else comments.prepend(comment);
+        status.textContent = "Dein Kommentar wurde veröffentlicht.";
       });
     });
   }
 
   open.addEventListener("click", load);
+}
+
+function createComment(item) {
+  const comment = document.createElement("article");
+  const name = document.createElement("strong");
+  const message = document.createElement("p");
+  name.textContent = item.name;
+  message.textContent = item.message;
+  message.style.whiteSpace = "pre-wrap";
+  comment.append(name, message);
+  return comment;
 }
 
 function readLocal(key) {

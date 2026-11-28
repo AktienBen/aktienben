@@ -115,9 +115,10 @@ export default {
         return json({ error: "invalid_comment" }, 400);
       }
       if (!await verifyChallenge(input.token, action, env)) return json({ error: "challenge_failed" }, 403);
-      await env.DB.prepare("INSERT INTO comments (article, name, message) VALUES (?, ?, ?)")
-        .bind(article, name || "Anonym", message).run();
-      return json({ pending: true }, 201);
+      const comment = { name: name || "Anonym", message };
+      await env.DB.prepare("INSERT INTO comments (article, name, message, approved) VALUES (?, ?, ?, 1)")
+        .bind(article, comment.name, comment.message).run();
+      return json({ comment }, 201);
     } catch {
       return json({ error: "temporarily_unavailable" }, 503);
     }
