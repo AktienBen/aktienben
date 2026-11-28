@@ -129,7 +129,6 @@ function analysisItem(article) {
       </summary>
 
       <div class="article-body">
-        <p><a class="text-link" href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html", cloudflare: "cloudflare.html"}[article.id] || ("analysen.html#" + encodeURIComponent(article.id)))}">Analyse auf eigener Seite öffnen ↗</a></p>
         ${article.content.map(renderBlock).join("")}
         ${article.id === "cloudflare" ? "" : `<p class="chart-note">${article.id === "servicenow" ? "Disclaimer: Keine Anlageberatung. Alle Inhalte dienen ausschließlich Informationszwecken. Das ist meine Recherchearbeit. Investitionen erfolgen auf eigene Verantwortung und sind mit Risiken verbunden." : "Hinweis: Keine Anlageberatung. Alle Angaben sind eigenständig zu überprüfen."}</p>`}
       </div>
