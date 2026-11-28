@@ -1,3 +1,20 @@
+const articlePages = {axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html", cloudflare: "cloudflare.html"};
+const discussionSettings = {
+  endpoint: "https://aktienben-community.kontakt-aktienben.workers.dev/",
+  siteKey: "0x4AAAAAAGXDJUTM0vLAzDr6"
+};
+
+async function mountDiscussion(articleBody, articleId) {
+  if (!articleBody || !Object.hasOwn(articlePages, articleId)) return;
+
+  try {
+    const { addDiscussion } = await import("./discussion.js");
+    if (articleBody.isConnected) addDiscussion(articleBody, articleId, discussionSettings);
+  } catch (error) {
+    console.warn("Der Kommentarbereich konnte nicht geladen werden.", error);
+  }
+}
+
 
 const sortedArticles = [...articles].sort(
   (a, b) => b.date.localeCompare(a.date)
@@ -39,7 +56,7 @@ function cover(article) {
 
 function card(article) {
   return `
-    <a class="card" href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html", cloudflare: "cloudflare.html"}[article.id] || ("analysen.html#" + encodeURIComponent(article.id)))}">
+    <a class="card" href="${escapeHTML(articlePages[article.id] || ("analysen.html#" + encodeURIComponent(article.id)))}">
       ${cover(article)}
       <div class="card-content">
         <span class="meta">
@@ -165,7 +182,7 @@ function initHome() {
         <h3>${escapeHTML(latest.title)}</h3>
         <p>${escapeHTML(latest.excerpt)}</p>
         <a class="button"
-           href="${escapeHTML({axon: "axon-enterprise.html", rocketlab: "rocket-lab.html", servicenow: "servicenow.html", cloudflare: "cloudflare.html"}[latest.id] || ("analysen.html#" + encodeURIComponent(latest.id)))}">
+           href="${escapeHTML(articlePages[latest.id] || ("analysen.html#" + encodeURIComponent(latest.id)))}">
           Vollständige Analyse ↗
         </a>
       </div>
@@ -196,6 +213,7 @@ function initAnalyses() {
     list.querySelectorAll("details").forEach(details => {
       details.addEventListener("toggle", () => {
         if (!details.open) return;
+        void mountDiscussion(details.querySelector(".article-body"), details.id);
 
         list.querySelectorAll("details").forEach(other => {
           if (other !== details) other.open = false;
@@ -222,4 +240,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (document.body.dataset.page === "home") initHome();
   if (document.body.dataset.page === "analysen") initAnalyses();
+
+  if (document.body.dataset.page === "article") {
+    const page = location.pathname.split("/").pop();
+    const articleId = Object.keys(articlePages).find(id => articlePages[id] === page);
+    void mountDiscussion(document.querySelector("main .article-body"), articleId);
+  }
 });
