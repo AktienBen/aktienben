@@ -7,7 +7,7 @@ async function mountDiscussion(articleBody, articleId) {
   if (!articleBody || !articleId) return;
 
   try {
-    const { addDiscussion } = await import("./discussion.js?v=cf2058df");
+    const { addDiscussion } = await import("./discussion.js?v=602bff8a");
     if (articleBody.isConnected) addDiscussion(articleBody, articleId, discussionSettings);
   } catch (error) {
     console.warn("Der Kommentarbereich konnte nicht geladen werden.", error);

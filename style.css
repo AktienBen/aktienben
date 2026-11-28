@@ -602,7 +602,9 @@ nav .instagram-link {
 nav .instagram-link:hover,
 nav .instagram-link:focus-visible,
 .about-instagram:hover,
-.about-instagram:focus-visible {
+.about-instagram:focus-visible,
+.discussion-thumb-button:hover .discussion-thumb,
+.discussion-thumb-button:focus-visible .discussion-thumb {
   color: #ffffff;
   opacity: 1;
   filter: drop-shadow(0 0 6px rgba(255,255,255,.7));
@@ -809,14 +811,33 @@ nav .instagram-link svg { display: block; }
 }
 
 .discussion-like[hidden] { display: none; }
-.discussion-like:not(:disabled):hover,
-.discussion-like[aria-pressed="true"] {
+.discussion-like:not(:disabled):hover {
   border-color: var(--accent);
   background: var(--surface-hover);
 }
 .discussion-like:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .discussion-like:disabled { cursor: default; }
-.discussion-like:disabled[aria-pressed="false"] { opacity: .6; }
+.discussion-thumb-button {
+  display: inline-grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #fff;
+}
+.discussion-thumb-button:disabled { cursor: default; }
+.discussion-thumb-button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.discussion-thumb {
+  display: block;
+  fill: transparent;
+  transition: fill .2s ease, filter .2s ease;
+}
+.discussion-thumb-button[aria-pressed="true"] .discussion-thumb { fill: #f04452; }
 
 .article-body .discussion-comments h3 {
   min-height: 36px;

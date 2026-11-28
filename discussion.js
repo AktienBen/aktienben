@@ -6,8 +6,10 @@ export function addDiscussion(container, article, { endpoint, siteKey }) {
   section.dataset.discussion = "";
   section.innerHTML = `
     <div class="discussion-likes">
-      <button type="button" class="discussion-like" data-like aria-label="Gefällt mir" aria-pressed="false" disabled>
-        <span aria-hidden="true">👍</span>
+      <button type="button" class="discussion-thumb-button" data-like aria-label="Gefällt mir" aria-pressed="false" disabled>
+        <svg class="discussion-thumb" viewBox="0 0 24 24" width="23" height="23" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 10 11 3a2.5 2.5 0 0 1 2.5 2.5V9H19a2 2 0 0 1 2 2.4l-1.4 7A2 2 0 0 1 17.6 20H4a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1h3Z"/>
+        </svg>
       </button>
       <output data-like-count aria-label="Anzahl der Likes">–</output>
     </div>
